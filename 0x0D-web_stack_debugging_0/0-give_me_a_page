@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# The commands used to fix the bug and show "Hello Holberton"
+sudo service apache2 status
+sudo service apache2 start
