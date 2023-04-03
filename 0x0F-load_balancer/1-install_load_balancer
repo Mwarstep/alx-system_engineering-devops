@@ -4,9 +4,23 @@
 sudo apt-get update
 sudo apt-get install haproxy -y
 
+
+# HAProxy Config
+sudo tee -a /etc/haproxy/haproxy.cfg > /dev/null <<EOT
+frontend http-in
+	bind *:80
+	default_backend servers
+
+backend servers
+	balance roundrobin
+	server web-01 54.160.101.122:80 check
+	server web-02 54.237.51.149:80 check
+EOT
+
 sudo /etc/init.d/haproxy start
 
-# HAProxy configuration
-sudo sed -i '$ a\\nbackend lb-01\n\tbalance roundrobin\n\tmode http\n\tserver web-01 54.160.101.122:80 check\n\tserver web-02 54.237.51.149:80 check\n\frontend http\n\tbind *:80\n\tmode http\n\n\tuse_backend lb-01' /etc/haproxy/haproxy.cfg
+# HAProxy will start on execution
+sudo update-rc.d haproxy defaults
 
-sudo haproxy -f /etc/haproxy/haproxy.cfg
+# HAProxy config reload
+sudo /etc/init.d/haproxy reload
