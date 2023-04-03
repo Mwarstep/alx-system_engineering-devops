@@ -7,7 +7,6 @@ sudo apt-get install haproxy -y
 sudo /etc/init.d/haproxy start
 
 # HAProxy configuration
-sudo sed -i '$ a\\nbackend lb-01\n\tbalance roundrobin\n\tmode http\n\tserver web-01 54.160.101.122:80 check\n\tserver web-02 54.237.51.149:80 check\n\
-	frontend http\n\tbind *:80\n\tmode http\n\n\tuse_backend lb-01' /etc/haproxy/haproxy.cfg
+sudo sed -i '$ a\\nbackend lb-01\n\tbalance roundrobin\n\tmode http\n\tserver web-01 54.160.101.122:80 check\n\tserver web-02 54.237.51.149:80 check\n\frontend http\n\tbind *:80\n\tmode http\n\n\tuse_backend lb-01' /etc/haproxy/haproxy.cfg
 
 sudo haproxy -f /etc/haproxy/haproxy.cfg
