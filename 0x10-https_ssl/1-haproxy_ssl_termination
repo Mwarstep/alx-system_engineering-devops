@@ -55,4 +55,3 @@ frontend http
         mode http
 
         use_backend lb-01         
-
