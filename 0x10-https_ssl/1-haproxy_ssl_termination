@@ -1,4 +1,4 @@
-lobal
+global
         log /dev/log    local0
         log /dev/log    local1 notice
         chroot /var/lib/haproxy
@@ -50,7 +50,7 @@ backend lb-01
         mode http
         server web-01 54.160.101.122:80 check
         server web-02 54.237.51.149:80 check
-^Lrontend http
+frontend http
         bind *:80
         mode http
 
