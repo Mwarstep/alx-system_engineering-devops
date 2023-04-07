@@ -7,7 +7,6 @@ global
         user haproxy
         group haproxy
         daemon
-        maxconn 2048
 
         tune.ssl.default-dh-param 2048
 
@@ -25,8 +24,6 @@ defaults
         mode    http
         option  httplog
         option  dontlognull
-        option forwardfor
-        option http-server-close
         timeout connect 5000
         timeout client  50000
         timeout server  50000
@@ -39,17 +36,18 @@ defaults
         errorfile 504 /etc/haproxy/errors/504.http
 frontend http-in
         bind *:80
-        bind 100.26.231.29:443 ssl crt /etc/haproxy/certs/www.mwarstep.tech.pem
-        reqadd X-Forwarded-Proto:\ https
+        bind :443 ssl crt /etc/haproxy/certs/www.mwarstep.tech.pem
         acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+        redirect scheme https if !{ ssl_fc }
         use_backend letsencrypt-backend if letsencrypt-acl
         default_backend servers
 
 backend servers
         balance roundrobin
-        redirect scheme https if !{ ssl_fc }
-        server web-01 54.160.101.122:80 check
-        server web-02 54.237.51.149:80 check
+        redirect scheme https code 301 if !{ ssl_fc }
+        server 127011-web-01 54.160.101.122:80 check
+        server 127011-web-02 54.237.51.149:80 check
+
 
 backend letsencrypt-backend
         server letsencrypt 127.0.0.1:54321
