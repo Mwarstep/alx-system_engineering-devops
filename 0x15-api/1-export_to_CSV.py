@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """Will export TODO List info to a CSV Format."""
+import csv
 import requests
 import sys
-import csv
 
 
 if __name__ == '__main__':
