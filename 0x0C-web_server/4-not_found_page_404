@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
-# Install Nginx
+# Will Install Nginx
 
 sudo apt-get update
 sudo apt-get install nginx -y
 
-# create a hello world page
+# Creates a hello world page
 echo "Hello World!" | sudo tee /var/www/html/index.html
 
-# create a redirection for our website
+# Creates a redirection for our website
 sudo sed -i '/server_name _;/a \	location /redirect_me {\n		return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;\n	}' /etc/nginx/sites-available/default
 
 
-# Create a custom 404 page
+# Creates a custom 404 page
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/custom_404.html
 
 # Configure Nginx to use the custom 404 page
