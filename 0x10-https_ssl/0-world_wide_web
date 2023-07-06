@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Configures my domain zone so that the subdomain www points to
-# my load-balancer IP (lb-01).
+# my load-balancer IP (lb-01), and my two servers IP (web-01 | web-02).
 
 get_dns_info() {
     local domain="$1"
