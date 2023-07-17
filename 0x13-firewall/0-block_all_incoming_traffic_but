@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Will configure my firewall in the Servers and LBs
+# This will configure my firewall in the Servers and LBs
 
 sudo apt update
 sudo apt install ufw
