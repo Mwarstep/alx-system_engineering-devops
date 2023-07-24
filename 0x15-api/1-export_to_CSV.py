@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Will export TODO List info to a CSV Format."""
+"""This will export TODO List info to a CSV Format."""
 import csv
 import requests
 import sys
